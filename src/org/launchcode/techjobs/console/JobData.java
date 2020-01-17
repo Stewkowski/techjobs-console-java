@@ -76,12 +76,32 @@ public class JobData {
 
             String aValue = row.get(column);
 
-            if (aValue.contains(value)) {
+            if (aValue.toLowerCase().contains(value.toLowerCase())) {
                 jobs.add(row);
             }
         }
 
         return jobs;
+    }
+
+    public static ArrayList<HashMap<String, String>> findByValue(String value){
+
+        loadData();
+
+        ArrayList<HashMap<String, String>> job = new ArrayList<>();
+
+
+        for (HashMap<String, String> row : allJobs){
+// iterate through row, key by key (you'll use keySet()
+         for (String item : row.keySet())
+            if (row.get(item).toLowerCase().contains(value.toLowerCase())){
+//
+                job.add(row);
+                break;
+            }
+        }
+
+        return job;
     }
 
     /**
